@@ -9,23 +9,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
     <style>
         .typewriter {
-            animation: typing 5s steps(30, end) infinite,
+            animation: typing 6s steps(30, end) infinite,
                 blink-caret 0.5s step-end infinite;
             color: #3F3E3E;
-            font-weight: semibold;
+            font-weight: 600;
             font-size: 2.75rem;
             line-height: 1.25;
             font-family: "Sen", sans-serif;
         }
 
         .flex-line {
-            display: flex;
-            align-items: flex-start;
+            /* display: flex;
+            align-items: flex-start; */
+            /* float: right; */
         }
 
         .typewrite {
             margin: 0;
             padding: 0;
+        }
+        @media only screen and (max-width:991px){
+            .typewriter {
+            font-size: 2rem;
+            line-height: 1;
+            }
+        }
+        @media only screen and (max-width:767px){
+            .typewriter {
+            font-size: 1.5rem;
+            line-height: .7;
+            }
+        }
+        @media only screen and (max-width:600px){
+            .typewriter {
+            font-size: 1rem;
+            line-height: normal;
+            }
         }
     </style>
 </head>
@@ -33,10 +52,10 @@
 <body>
     <div class="typewriter">
         <div class="flex-line">
-            You&nbsp;<p class="typewrite" data-period="500"
+            You&nbsp;<span class="typewrite" data-period="500"
                 data-type='[ "win the client ", "leave your goals in the dust ", "make more sales","stand out from the competition","convert the skeptics","inspire donors","make a difference in people’s lives","live happily ever after ✨" ]'>
                 <span class="wrap"></span>
-            </p>
+            </span>
         </div>
     </div>
 
