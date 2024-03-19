@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Typewritter</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <style>
+        .typewriter  {
+            /* color: #fff !important; */
+            /* overflow: hidden; */
+            /* Ensures the content is not revealed until the animation */
+            /* border-right: 0.15em solid #4748a8; */
+            /* The typwriter cursor */
+            /* white-space: nowrap; */
+            /* Keeps the content on a single line */
+            animation: typing 5s steps(30, end) infinite,
+                blink-caret 0.5s step-end infinite;
+            color: #3F3E3E;
+            font-weight: semibold;
+            font-size: 2.75rem;
+            line-height: 1.25;
+            font-family: "Sen", sans-serif;
+        }
+        .flex-line{
+            display: flex;
+            align-items: flex-start;
+        }
+        .typewrite{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body >
+    <div class="typewriter">
+        <div class="flex-line">
+            You&nbsp;<p class="typewrite" data-period="500"
+                data-type='[ "win the client ", "leave your goals in the dust ", "make more sales","stand out from the competition","convert the skeptics","inspire donors","make a difference in people’s lives","live happily ever after ✨" ]'>
+                <span class="wrap"></span>
+            </p>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script>
+        var TxtType = function (el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function () {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(function () {
+                that.tick();
+            }, delta);
+        };
+
+        window.onload = function () {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i = 0; i < elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                    new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.06em solid #3F3E3E}";
+            document.body.appendChild(css);
+        };
+
+
+
+    </script>
+</body>
+
+</html>
