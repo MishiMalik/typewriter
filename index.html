@@ -8,9 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
     <style>
-        .typewriter {
-            animation: typing 6s steps(30, end) infinite,
-                blink-caret 0.5s step-end infinite;
+        .typewriter {               
+
             color: #3F3E3E;
             font-weight: 600;
             font-size: 2.75rem;
@@ -22,28 +21,29 @@
             margin: 0;
             padding: 0;
         }
-        @media only screen and (max-width:991px){
+
+        @media only screen and (max-width:991px) {
             .typewriter {
-            font-size: 2rem;
-            line-height: 1;
+                font-size: 2rem;
+                line-height: 1;
             }
         }
-        @media only screen and (max-width:767px){
+
+        @media only screen and (max-width:767px) {
             .typewriter {
-            font-size: 1.75rem;
-            line-height: normal;
+                font-size: 1.75rem;
+                line-height: normal;
             }
         }
-        
-        
     </style>
 </head>
 
 <body>
     <div class="typewriter">
         <div class="flex-line">
+            Spoiler alert:<br>
             You&nbsp;<span class="typewrite" data-period="500"
-                data-type='[ "win the client ", "leave your goals in the dust ", "make more sales","stand out from the competition","convert the skeptics","inspire donors","make a difference in people’s lives","live happily ever after ✨" ]'>
+ data-type='[ "land the client ", "surpass your goals ", "make more sales","inspire donors","change the world","live happily ever after  ✨" ]'>
                 <span class="wrap"></span>
             </span>
         </div>
@@ -56,6 +56,7 @@
         var TxtType = function (el, toRotate, period) {
             this.toRotate = toRotate;
             this.el = el;
+            // this.defaultDelta = 1000; // Adjust this value to control the typing speed
             this.loopNum = 0;
             this.period = parseInt(period, 10) || 2000;
             this.txt = '';
@@ -78,15 +79,23 @@
             var that = this;
             var delta = 200 - Math.random() * 100;
 
-            if (this.isDeleting) { delta /= 2; }
+            if (this.isDeleting) {
+                delta /= 2;
+            }
 
             if (!this.isDeleting && this.txt === fullTxt) {
-                delta = this.period;
-                this.isDeleting = true;
+                if (i === this.toRotate.length - 1) {
+                    // Adjust the duration to stay before erasing the last line
+                    delta = 2000; // 10 seconds before removing the last line
+                    this.isDeleting = true;
+                } else {
+                    delta = this.period;
+                    this.isDeleting = true;
+                }
             } else if (this.isDeleting && this.txt === '') {
                 this.isDeleting = false;
                 this.loopNum++;
-                delta = 500;
+                delta = 600;
             }
 
             setTimeout(function () {
